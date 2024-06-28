@@ -68,6 +68,18 @@ class Floor(models.Model):
         verbose_name='طبقه'
         verbose_name_plural='طبقه ها'
 
+
+#-----------------------------------------------
+class Price(models.Model):
+    price=models.CharField(null=True,blank=True, max_length=50)
+
+    def __str__(self):
+        return str(self.price)
+    
+    class Meta:
+        verbose_name='قیمت'
+        verbose_name_plural='قیمت ها'
+
 #-----------------------------------------------
 class Melk(models.Model):
     full_name_seller=models.CharField(verbose_name='نام فروشنده', max_length=200,null=True)
@@ -77,7 +89,7 @@ class Melk(models.Model):
     slug=models.SlugField(null=True,blank=True)
     image_upload=utils.FileUpload('images','melk')
     image=models.ImageField(upload_to=image_upload.upload_to,null=True,blank=True)
-    price=models.CharField(verbose_name='قیمت', max_length=250,null=True)
+    price=models.ForeignKey(Price,null=True,blank=True, on_delete=models.CASCADE)
     floor=models.ForeignKey(Floor, verbose_name='طبقه', on_delete=models.CASCADE,null=True,blank=True)
     trade_type=models.ForeignKey(TradeType, verbose_name='نوع معامله', on_delete=models.CASCADE,null=True,blank=True)
     type_house=models.ForeignKey(TypeHouse, verbose_name='نوع ملک', on_delete=models.CASCADE,null=True,blank=True)

@@ -37,13 +37,16 @@ class AreaAdmin(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     list_display=('number_of_home',)
 
+@admin.register(Price)
+class priceAdmin(admin.ModelAdmin):
+    list_display=('price',)
 
 
 
 @admin.register(Melk)
 class MelkAdmin(admin.ModelAdmin):
     list_display=('full_name_seller','is_active','image','floor','trade_type','type_house','metr','area','room','price')
-    list_filter=('is_active','floor','trade_type','type_house','metr','area','room')
+    list_filter=('is_active','floor','trade_type','type_house','metr','area','room','price')
     search_fields=('floor','trade_type','type_house','metr','area','room')
     list_editable=['is_active']
 
